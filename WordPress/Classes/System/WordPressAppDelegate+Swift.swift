@@ -34,11 +34,7 @@ extension WordPressAppDelegate {
     }
 
     @objc func configureCrashLogging() {
-        #if DEBUG
-            return
-        #else
-            WPCrashLogging.start()
-        #endif
+        WPCrashLogging.start()
     }
 
     @objc func configureHockeySDK() {
