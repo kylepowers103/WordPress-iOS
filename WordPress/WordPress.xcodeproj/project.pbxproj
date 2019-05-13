@@ -1579,7 +1579,6 @@
 		E1CB6DA3200F376400945457 /* TimeZoneStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CB6DA2200F376400945457 /* TimeZoneStore.swift */; };
 		E1CB6DA7200F661900945457 /* TimeZoneSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CB6DA6200F661900945457 /* TimeZoneSelectorViewController.swift */; };
 		E1CE41661E8D1026000CF5A4 /* ShareExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CE41641E8D101A000CF5A4 /* ShareExtractor.swift */; };
-		E1CECE021E6EC7A8009C6695 /* FakePreviewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CECE011E6EC7A8009C6695 /* FakePreviewBuilder.swift */; };
 		E1CECE051E6F01CE009C6695 /* PostPreviewGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CECE041E6F01CE009C6695 /* PostPreviewGenerator.swift */; };
 		E1CFC1571E0AC8FF001DF9E9 /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CFC1561E0AC8FF001DF9E9 /* Pattern.swift */; };
 		E1D0D81616D3B86800E33F4C /* SafariActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D0D81516D3B86800E33F4C /* SafariActivity.m */; };
@@ -1728,7 +1727,6 @@
 		FF00889F204E01AE007CCE66 /* MediaQuotaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00889E204E01AE007CCE66 /* MediaQuotaCell.swift */; };
 		FF0148E51DFABBC9001AD265 /* NSFileManager+FolderSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0148E41DFABBC9001AD265 /* NSFileManager+FolderSize.swift */; };
 		FF0AAE0A1A150A560089841D /* WPProgressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FF0AAE091A150A560089841D /* WPProgressTableViewCell.m */; };
-
 		FF0D8146205809C8000EE505 /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0D8145205809C8000EE505 /* PostCoordinator.swift */; };
 		FF0F722C206E5345000DAAB5 /* PostService+RefreshStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0F722B206E5345000DAAB5 /* PostService+RefreshStatus.swift */; };
 		FF1933FF1BB17DA3006825B8 /* RelatedPostsPreviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1933FE1BB17DA3006825B8 /* RelatedPostsPreviewTableViewCell.m */; };
@@ -3742,7 +3740,6 @@
 		E1CB6DA2200F376400945457 /* TimeZoneStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneStore.swift; sourceTree = "<group>"; };
 		E1CB6DA6200F661900945457 /* TimeZoneSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneSelectorViewController.swift; sourceTree = "<group>"; };
 		E1CE41641E8D101A000CF5A4 /* ShareExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareExtractor.swift; path = WordPressShareExtension/ShareExtractor.swift; sourceTree = SOURCE_ROOT; };
-		E1CECE011E6EC7A8009C6695 /* FakePreviewBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakePreviewBuilder.swift; sourceTree = "<group>"; };
 		E1CECE041E6F01CE009C6695 /* PostPreviewGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostPreviewGenerator.swift; sourceTree = "<group>"; };
 		E1CFC1561E0AC8FF001DF9E9 /* Pattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		E1D0D81416D3B86800E33F4C /* SafariActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafariActivity.h; sourceTree = "<group>"; };
@@ -4488,7 +4485,7 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		29B97314FDCFA39411CA2CEA = {
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
 				F14B5F6F208E648200439554 /* config */,
@@ -5132,7 +5129,6 @@
 			children = (
 				595CB3751D2317D50082C7E9 /* PostListFilter.swift */,
 				43AB7C5D1D3E70510066CB6A /* PostListFilterSettings.swift */,
-				E1CECE011E6EC7A8009C6695 /* FakePreviewBuilder.swift */,
 				E1CECE041E6F01CE009C6695 /* PostPreviewGenerator.swift */,
 				174C9696205A846E00CEEF6E /* PostNoticeViewModel.swift */,
 				170CE73F2064478600A48191 /* PostNoticeNavigationCoordinator.swift */,
@@ -8934,7 +8930,7 @@
 				bg,
 				sk,
 			);
-			mainGroup = 29B97314FDCFA39411CA2CEA;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			productRefGroup = 19C28FACFE9D520D11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -10700,7 +10696,6 @@
 				5D6C4B121B604190005E3C43 /* RichTextView.swift in Sources */,
 				4319AADE2090F00C0025D68E /* FancyAlertViewController+NotificationPrimer.swift in Sources */,
 				73FF7032221F469100541798 /* Charts+Support.swift in Sources */,
-				E1CECE021E6EC7A8009C6695 /* FakePreviewBuilder.swift in Sources */,
 				171963401D378D5100898E8B /* SearchWrapperView.swift in Sources */,
 				173F6DFC21232F2A00A4C8E2 /* NoResultsGiphyConfiguration.swift in Sources */,
 				0815CF461E96F22600069916 /* MediaImportService.swift in Sources */,

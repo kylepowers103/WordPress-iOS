@@ -29,19 +29,23 @@ class PostPreviewGenerator: NSObject {
             attemptPreview(url: previewURL)
         } else {
             guard let url = post.permaLink.flatMap(URL.init(string:)) else {
-                showFakePreview()
+                delegate?.previewFailed(self, message: Constants.previewFailureMessage)
                 return
             }
              attemptPreview(url: url)
         }
     }
 
-    @objc func previewRequestFailed(error: NSError) {
-        delegate?.previewFailed(self, message: NSLocalizedString("There has been an error while trying to reach your site.", comment: "An error message."))
+    @objc func previewRequestFailed() {
+        delegate?.previewFailed(self, message: Constants.previewFailureMessage)
     }
 
     @objc func interceptRedirect(request: URLRequest) -> URLRequest? {
         return authenticator?.interceptRedirect(request: request)
+    }
+    
+    private struct Constants {
+        static let previewFailureMessage = NSLocalizedString("There has been an error while trying to reach your site.", comment: "An error message.")
     }
 }
 
@@ -102,7 +106,7 @@ private extension PostPreviewGenerator {
     func attemptNonceAuthenticatedRequest(url: URL) {
         guard let nonce = post.blog.getOptionValue("frame_nonce") as? String,
             let authenticatedUrl = addNonce(nonce, to: url) else {
-                showFakePreview()
+                delegate?.previewFailed(self, message: Constants.previewFailureMessage)
                 return
         }
         let request = URLRequest(url: authenticatedUrl)
@@ -111,7 +115,7 @@ private extension PostPreviewGenerator {
 
     func attemptCookieAuthenticatedRequest(url: URL) {
         guard let authenticator = authenticator else {
-            showFakePreview()
+            delegate?.previewFailed(self, message: Constants.previewFailureMessage)
             return
         }
         authenticator.request(url: url, cookieJar: HTTPCookieStorage.shared, completion: { [weak delegate] request in
@@ -130,10 +134,5 @@ private extension PostPreviewGenerator {
         queryItems.append(URLQueryItem(name: "frame-nonce", value: nonce))
         components.queryItems = queryItems
         return components.url
-    }
-
-    func showFakePreview(message: String? = nil) {
-        let builder = FakePreviewBuilder(apost: post, message: message)
-        delegate?.preview(self, loadHTML: builder.build())
     }
 }
