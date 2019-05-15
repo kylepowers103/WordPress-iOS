@@ -52,6 +52,7 @@ typedef NS_ENUM(NSUInteger, ActionBarMode) {
 @property (nonatomic, strong) IBOutlet NSLayoutConstraint *postCardImageViewHeightConstraint;
 
 @property (nonatomic, weak) id<InteractivePostViewDelegate> delegate;
+@property (nonatomic, weak) id<PostActionSheetDelegate> postActionSheetDelegate;
 @property (nonatomic, strong) Post *post;
 @property (nonatomic, strong) PostCardStatusViewModel *viewModel;
 @property (nonatomic, strong) ImageLoader *imageLoader;
@@ -258,6 +259,16 @@ typedef NS_ENUM(NSUInteger, ActionBarMode) {
 - (void)setInteractionDelegate:(id<InteractivePostViewDelegate>)delegate
 {
     self.delegate = delegate;
+}
+
+- (void)setActionSheetDelegate:(id<PostActionSheetDelegate>)delegate
+{
+    self.postActionSheetDelegate = delegate;
+
+    __weak __typeof(self) weakSelf = self;
+    [self.actionBar setMoreAction:^(UIView *view) {
+        [weakSelf showActionSheet:view];
+    }];
 }
 
 #pragma mark - Configuration
@@ -685,51 +696,37 @@ typedef NS_ENUM(NSUInteger, ActionBarMode) {
 
 - (void)editPostAction
 {
-    if ([self.delegate respondsToSelector:@selector(cell:handleEditPost:)]) {
-        [self.delegate cell:self handleEditPost:self.post];
-    }
+    [self.delegate edit:self.post];
 }
 
 - (void)viewPostAction
 {
-    if ([self.delegate respondsToSelector:@selector(cell:handleViewPost:)]) {
-        [self.delegate cell:self handleViewPost:self.post];
-    }
+    [self.delegate view:self.post];
 }
 
 - (void)publishPostAction
 {
-    if ([self.delegate respondsToSelector:@selector(cell:handlePublishPost:)]) {
-        [self.delegate cell:self handlePublishPost:self.post];
-    }
+    [self.delegate publish:self.post];
 }
 
 - (void)schedulePostAction
 {
-    if ([self.delegate respondsToSelector:@selector(cell:handleSchedulePost:)]) {
-        [self.delegate cell:self handleSchedulePost:self.post];
-    }
+    [self.delegate schedule:self.post];
 }
 
 - (void)trashPostAction
 {
-    if ([self.delegate respondsToSelector:@selector(cell:handleTrashPost:)]) {
-        [self.delegate cell:self handleTrashPost:self.post];
-    }
+    [self.delegate trash:self.post];
 }
 
 - (void)restorePostAction
 {
-    if ([self.delegate respondsToSelector:@selector(cell:handleRestorePost:)]) {
-        [self.delegate cell:self handleRestorePost:self.post];
-    }
+    [self.delegate restore:self.post];
 }
 
 - (void)statsPostAction
 {
-    if ([self.delegate respondsToSelector:@selector(cell:handleStatsForPost:)]) {
-        [self.delegate cell:self handleStatsForPost:self.post];
-    }
+    [self.delegate statsFor:self.post];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
@@ -739,6 +736,12 @@ typedef NS_ENUM(NSUInteger, ActionBarMode) {
         [self applyStyles];
         [self arrangeStackViews];
     }
+}
+
+#pragma mark - Post Action Sheet
+
+- (void)showActionSheet:(UIView *)view {
+    [self.postActionSheetDelegate showActionSheet:self.post from: view];
 }
 
 @end

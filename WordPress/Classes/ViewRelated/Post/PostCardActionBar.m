@@ -32,6 +32,7 @@ static const UIEdgeInsets MoreButtonImageInsets = {0.0, 0.0, 0.0, 4.0};
 @property (nonatomic, assign) NSInteger currentBatch;
 @property (nonatomic, assign) BOOL shouldShowMore;
 @property (nonatomic, assign) BOOL needsSetupButtons;
+@property (nonatomic, copy) MoreActionCallback moreActionCallback;
 @end
 
 @implementation PostCardActionBar
@@ -290,6 +291,10 @@ static const UIEdgeInsets MoreButtonImageInsets = {0.0, 0.0, 0.0, 4.0};
     [self configureButtons];
 }
 
+- (void)setMoreAction:(MoreActionCallback)callback {
+    self.moreActionCallback = callback;
+}
+
 #pragma mark - Accessors
 
 - (NSInteger)indexOfItem:(PostCardActionBarItem *)item
@@ -314,7 +319,7 @@ static const UIEdgeInsets MoreButtonImageInsets = {0.0, 0.0, 0.0, 4.0};
 
 - (BOOL)checkIfShouldShowMoreButton
 {
-    return [self maxButtonsToDisplay] < [self.items count];
+    return [self maxButtonsToDisplay] < [self.items count] || _moreActionCallback;
 }
 
 - (void)setItems:(NSArray *)items
@@ -382,13 +387,22 @@ static const UIEdgeInsets MoreButtonImageInsets = {0.0, 0.0, 0.0, 4.0};
     UIButton *button = (UIButton *)sender;
     NSInteger index = button.tag;
     if (index == ActionBarMoreButtonIndex) {
-        self.currentBatch++;
-        [self configureButtonsWithAnimation];
+        [self handleMoreButtonTap:sender];
         return;
     }
     PostCardActionBarItem *item = [self.items objectAtIndex:index];
     if (item.callback) {
         item.callback();
+    }
+}
+
+- (void)handleMoreButtonTap: (UIButton *)sender
+{
+    if (_moreActionCallback) {
+        _moreActionCallback(sender);
+    } else {
+        self.currentBatch++;
+        [self configureButtonsWithAnimation];
     }
 }
 
